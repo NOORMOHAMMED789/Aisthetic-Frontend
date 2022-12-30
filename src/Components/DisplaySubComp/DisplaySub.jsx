@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DisplaySub2 from "../DisplaySubComp2/DisplaySub2";
 import "./DisplaySub.css";
 
 const Display = (props) => {
@@ -7,9 +6,10 @@ const Display = (props) => {
     subItem: "",
     subPeople: "",
   });
-
-  const [enable, setEnable] = useState(false);
-  const [enter, setEnter] = useState(true);
+  const [subdata1, setSubData1] = useState({
+    subItem1: "",
+    subPeople1: "",
+  });
 
   const subChangeHandler = (e) => {
     setSubData({ ...subdata, subItem: e.target.value });
@@ -19,40 +19,46 @@ const Display = (props) => {
     setSubData({ ...subdata, subPeople: e.target.value });
   };
 
+  const sub1ChangeHandler = (e) => {
+    setSubData1({ ...subdata1, subItem1: e.target.value });
+  };
+
+  const subPeople1ChangeHandler = (e) => {
+    setSubData1({ ...subdata1, subPeople1: e.target.value });
+  };
+
   const enterHandler = (e) => {
-    const { subItem, subPeople } = subdata;
+    const { subItem1, subPeople1 } = subdata1;
     if (e.key === "Enter") {
-      setEnable(true);
-      setEnter(false);
       console.log("Enter Clicked");
-      console.log(subItem, subPeople);
+      console.log(subItem1, subPeople1);
     }
   };
   return (
-    <div className="subdisplay_items">
-      <div className="subdisplay_items__list">
-        <h1 className="subdisplay_main_category">
-          {props.subItem}, {props.subPeople} &nbsp; <span>Edit</span> &nbsp;{" "}
-          <span>Delete</span> &nbsp; <span>MoveUp</span> &nbsp;{" "}
-          <span>MoveDown</span>
-        </h1>
-      </div>
+    <>
+      <div className="subdisplay_items">
+        <div className="subdisplay_items__list">
+          <h1 className="subdisplay_main_category">
+            {props.subItem}, {props.subPeople} &nbsp; <span>Edit</span> &nbsp;{" "}
+            <span>Delete</span> &nbsp; <span>MoveUp</span> &nbsp;{" "}
+            <span>MoveDown</span>
+          </h1>
+        </div>
+        <div className="search_list">
+          <input
+            type="text"
+            placeholder="Search items to add"
+            className="search_list__items"
+          />
+        </div>
 
-      <div className="search_list">
-        <input
-          type="text"
-          placeholder="Search items to add"
-          className="search_list__items"
-        />
-      </div>
-
-      {enter && (
-        <form className="subcategory_list" onKeyDown={enterHandler}>
+        <form className="menupage_list" onKeyDown={enterHandler}>
           <input
             type="text"
             placeholder="Sub Category name"
             className="search_list__items"
             onChange={subChangeHandler}
+            autoFocus
           />
           <input
             type="text"
@@ -61,28 +67,23 @@ const Display = (props) => {
             onChange={subPeopleChangeHandler}
           />
         </form>
-      )}
-      {enable && (
-        <DisplaySub2 subItem={subdata.subItem} subPeople={subdata.subPeople} />
-      )}
 
-      {enter && (
-        <form className="subcategory2" onKeyDown={enterHandler}>
+        <form className="subpage_list">
           <input
             type="text"
             placeholder="Sub Category name"
             className="search_list__items"
-            onChange={subChangeHandler}
+            onChange={sub1ChangeHandler}
           />
           <input
             type="text"
             placeholder="Number of People"
             className="search_list__items"
-            onChange={subPeopleChangeHandler}
+            onChange={subPeople1ChangeHandler}
           />
         </form>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

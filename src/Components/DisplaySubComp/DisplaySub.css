@@ -4,15 +4,27 @@
   font-weight: bolder;
 }
 
+.subdisplay_items {
+  margin-left: 4vw;
+}
+
 .subdisplay_main_category span {
   font-size: 1rem;
   text-decoration: underline;
 }
 
-.subdisplay_items {
+.search_list__items1 {
+  padding: 1vh 1vw;
+  font-size: 1rem;
   margin-left: 4vw;
+  border-style: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid gray;
+  color: gray;
 }
 
-.subcategory2 {
+.subpage_list {
   margin-left: -4vw;
 }

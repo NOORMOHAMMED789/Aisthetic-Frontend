@@ -7,6 +7,10 @@ const Display = (props) => {
     subItem: "",
     subPeople: "",
   });
+  const [subdata1, setSubData1] = useState({
+    subItem1: "",
+    subPeople1: "",
+  });
 
   const [enable, setEnable] = useState(false);
   const [enter, setEnter] = useState(true);
@@ -18,6 +22,13 @@ const Display = (props) => {
   const subPeopleChangeHandler = (e) => {
     setSubData({ ...subdata, subPeople: e.target.value });
   };
+  const sub1ChangeHandler = (e) => {
+    setSubData1({ ...subdata1, subItem1: e.target.value });
+  };
+
+  const subPeople1ChangeHandler = (e) => {
+    setSubData1({ ...subdata, subPeople1: e.target.value });
+  };
 
   const enterHandler = (e) => {
     const { subItem, subPeople } = subdata;
@@ -26,6 +37,15 @@ const Display = (props) => {
       setEnter(false);
       console.log("Enter Clicked");
       console.log(subItem, subPeople);
+    }
+  };
+  const enterHandler1 = (e) => {
+    const { subItem1, subPeople1 } = subdata1;
+    if (e.key === "Enter") {
+      setEnable(true);
+      setEnter(false);
+      console.log("Enter Clicked");
+      console.log(subItem1, subPeople1);
     }
   };
   return (
@@ -53,6 +73,7 @@ const Display = (props) => {
             placeholder="Sub Category name"
             className="search_list__items"
             onChange={subChangeHandler}
+            autoFocus
           />
           <input
             type="text"
@@ -65,19 +86,20 @@ const Display = (props) => {
       {enable && (
         <DisplaySub subItem={subdata.subItem} subPeople={subdata.subPeople} />
       )}
-
-      <div className="menupage_list">
+      <form className="subcategory_list" onKeyDown={enterHandler1}>
         <input
           type="text"
           placeholder="Main Category name"
           className="search_list__items"
+          onChange={sub1ChangeHandler}
         />
         <input
           type="text"
           placeholder="Number of People"
           className="search_list__items"
+          onChange={subPeople1ChangeHandler}
         />
-      </div>
+      </form>
     </div>
   );
 };
