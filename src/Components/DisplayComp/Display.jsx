@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DisplaySub from "../DisplaySubComp/DisplaySub";
 import DisplaySub3 from "../DisplaySubComp3/DisplaySub3";
 import "./Display.css";
-
-// const LOCAL_STORAGE_KEY = "items";
+import axios from "axios";
 
 const Display = (props) => {
   const [subdata, setSubData] = useState({
@@ -15,10 +14,15 @@ const Display = (props) => {
     subPeople1: "",
   });
 
+  const [itemsArray, setItemsArray] = useState([]);
+
   const [enable, setEnable] = useState(false);
   const [enter, setEnter] = useState(true);
   const [display3, setDisplay3] = useState(false);
   const [shutmain, setShutMain] = useState(true);
+  const [focus, setFocus] = useState(false);
+
+  const [getId, setGetId] = useState([]);
 
   const subChangeHandler = (e) => {
     setSubData({ ...subdata, subItem: e.target.value });
@@ -55,6 +59,16 @@ const Display = (props) => {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get("http:///localhost:3001/api/v1/items")
+      .then((response) => {
+        console.log(response.data.products);
+        setItemsArray(response.data.products);
+      })
+      .then((err) => console.log(err));
+  }, []);
+
   return (
     <div className="display_items">
       <div className="display_items__list">
@@ -65,14 +79,29 @@ const Display = (props) => {
         </h1>
       </div>
 
+      <div className="list">{getId}</div>
       <div className="search_list">
         <input
-          type="text"
-          placeholder="Search items to add"
-          className="search_list__items"
+          className="dropdown-btn search_list__items"
+          placeholder="Search to add Items"
+          onFocus={() => setFocus(!focus)}
         />
+        {focus &&
+          itemsArray.map((item, index) => {
+            return (
+              <div
+                className="item_lists"
+                key={index}
+                onClick={() => {
+                  console.log(item.item);
+                  setGetId([...getId, item.item]);
+                }}
+              >
+                {item.item}
+              </div>
+            );
+          })}
       </div>
-
       {enter && (
         <form className="subcategory_list" onKeyDown={enterHandler}>
           <input

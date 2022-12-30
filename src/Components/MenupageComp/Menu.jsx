@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./Menu.css";
 import Display from "../DisplayComp/Display";
 
-// const LOCAL_STORAGE_KEY = "items";
-
 const Menu = () => {
   const [data, setData] = useState({
     item: "",
@@ -43,6 +41,7 @@ const Menu = () => {
                 placeholder="Main Category name"
                 value={data.item}
                 onChange={itemChangeHandler}
+                required
                 autoFocus
               />
               <input
@@ -50,6 +49,7 @@ const Menu = () => {
                 className="menupage_list__items"
                 placeholder="Number of People"
                 value={data.people}
+                required
                 onChange={peopleChangeHandler}
               />
             </form>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./DisplaySub.css";
 import DisplaySub2 from "../DisplaySubComp2/DisplaySub2";
+import axios from "axios";
 
 const Display = (props) => {
   const [subdata, setSubData] = useState({
