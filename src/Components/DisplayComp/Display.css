@@ -1,0 +1,25 @@
+.display_main_category {
+  font-size: 1.7rem;
+  color: darkslategray;
+}
+
+.display_main_category span {
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.search_list__items {
+  padding: 1vh 1vw;
+  margin: 1vw;
+  font-size: 1rem;
+  border-style: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid gray;
+  color: gray;
+}
+
+.subcategory_list {
+  color: darkslategray;
+}

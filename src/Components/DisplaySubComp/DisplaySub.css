@@ -1,0 +1,18 @@
+.subdisplay_main_category {
+  font-size: 1.4rem;
+  color: darkslategray;
+  font-weight: bolder;
+}
+
+.subdisplay_main_category span {
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.subdisplay_items {
+  margin-left: 4vw;
+}
+
+.subcategory2 {
+  margin-left: -4vw;
+}

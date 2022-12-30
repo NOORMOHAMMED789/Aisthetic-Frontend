@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import DisplaySub from "../DisplaySubComp/DisplaySub";
-import "./Display.css";
+import DisplaySub2 from "../DisplaySubComp2/DisplaySub2";
+import "./DisplaySub.css";
 
 const Display = (props) => {
   const [subdata, setSubData] = useState({
@@ -29,10 +29,10 @@ const Display = (props) => {
     }
   };
   return (
-    <div className="display_items">
-      <div className="display_items__list">
-        <h1 className="display_main_category">
-          {props.item}, {props.people} &nbsp; <span>Edit</span> &nbsp;{" "}
+    <div className="subdisplay_items">
+      <div className="subdisplay_items__list">
+        <h1 className="subdisplay_main_category">
+          {props.subItem}, {props.subPeople} &nbsp; <span>Edit</span> &nbsp;{" "}
           <span>Delete</span> &nbsp; <span>MoveUp</span> &nbsp;{" "}
           <span>MoveDown</span>
         </h1>
@@ -63,21 +63,25 @@ const Display = (props) => {
         </form>
       )}
       {enable && (
-        <DisplaySub subItem={subdata.subItem} subPeople={subdata.subPeople} />
+        <DisplaySub2 subItem={subdata.subItem} subPeople={subdata.subPeople} />
       )}
 
-      <div className="menupage_list">
-        <input
-          type="text"
-          placeholder="Main Category name"
-          className="search_list__items"
-        />
-        <input
-          type="text"
-          placeholder="Number of People"
-          className="search_list__items"
-        />
-      </div>
+      {enter && (
+        <form className="subcategory2" onKeyDown={enterHandler}>
+          <input
+            type="text"
+            placeholder="Sub Category name"
+            className="search_list__items"
+            onChange={subChangeHandler}
+          />
+          <input
+            type="text"
+            placeholder="Number of People"
+            className="search_list__items"
+            onChange={subPeopleChangeHandler}
+          />
+        </form>
+      )}
     </div>
   );
 };
