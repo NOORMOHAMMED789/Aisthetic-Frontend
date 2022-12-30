@@ -8,6 +8,7 @@ function getStorageValues(item, people) {
   if (window.localStorage) {
     return localStorage.getItem(item, people);
   }
+  return item;
 }
 
 export { setStorage, getStorageValues };

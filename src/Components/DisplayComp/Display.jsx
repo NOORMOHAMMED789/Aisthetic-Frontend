@@ -3,6 +3,8 @@ import DisplaySub from "../DisplaySubComp/DisplaySub";
 import DisplaySub3 from "../DisplaySubComp3/DisplaySub3";
 import "./Display.css";
 
+// const LOCAL_STORAGE_KEY = "items";
+
 const Display = (props) => {
   const [subdata, setSubData] = useState({
     subItem: "",

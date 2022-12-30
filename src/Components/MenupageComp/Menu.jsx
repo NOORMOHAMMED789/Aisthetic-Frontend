@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Menu.css";
 import Display from "../DisplayComp/Display";
-import { setStorage } from "../../LocalStorage";
+
+// const LOCAL_STORAGE_KEY = "items";
 
 const Menu = () => {
   const [data, setData] = useState({
@@ -26,7 +27,6 @@ const Menu = () => {
       setEnterForm(false);
       console.log("Enter Clicked");
       console.log(item, people);
-      setStorage(item, people);
     }
   };
 
