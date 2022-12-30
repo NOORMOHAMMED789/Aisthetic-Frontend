@@ -1,0 +1,17 @@
+.subdisplay_items2 {
+  font-size: 1rem;
+}
+.subdisplay_main_category2 {
+  font-size: 1.4rem;
+  color: darkslategray;
+  font-weight: bolder;
+}
+
+.subdisplay_main_category2 span {
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+.subpage {
+  margin-left: -7vw;
+}
