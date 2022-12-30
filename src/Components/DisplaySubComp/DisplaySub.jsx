@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./DisplaySub.css";
+import DisplaySub2 from "../DisplaySubComp2/DisplaySub2";
 
 const Display = (props) => {
   const [subdata, setSubData] = useState({
@@ -10,6 +11,10 @@ const Display = (props) => {
     subItem1: "",
     subPeople1: "",
   });
+
+  const [enter, setEnter] = useState(true);
+  const [enter1, setEnter1] = useState(false);
+  const [enter3, setEnter3] = useState(true);
 
   const subChangeHandler = (e) => {
     setSubData({ ...subdata, subItem: e.target.value });
@@ -28,8 +33,20 @@ const Display = (props) => {
   };
 
   const enterHandler = (e) => {
+    const { subItem, subPeople } = subdata;
+    if (e.key === "Enter") {
+      setEnter(false);
+      console.log("Enter Clicked");
+      console.log(subItem, subPeople);
+    }
+  };
+
+  const enterHandler1 = (e) => {
     const { subItem1, subPeople1 } = subdata1;
     if (e.key === "Enter") {
+      setEnter1(true);
+      setEnter3(false);
+
       console.log("Enter Clicked");
       console.log(subItem1, subPeople1);
     }
@@ -51,37 +68,45 @@ const Display = (props) => {
             className="search_list__items"
           />
         </div>
-
-        <form className="menupage_list" onKeyDown={enterHandler}>
-          <input
-            type="text"
-            placeholder="Sub Category name"
-            className="search_list__items"
-            onChange={subChangeHandler}
-            autoFocus
+        {enter && (
+          <form className="menupage_list" onKeyDown={enterHandler}>
+            <input
+              type="text"
+              placeholder="Sub Category name"
+              className="search_list__items"
+              onChange={subChangeHandler}
+              autoFocus
+            />
+            <input
+              type="text"
+              placeholder="Number of People"
+              className="search_list__items"
+              onChange={subPeopleChangeHandler}
+            />
+          </form>
+        )}
+        {enter3 && (
+          <form className="subpage_list" onKeyDown={enterHandler1}>
+            <input
+              type="text"
+              placeholder="Sub Category name"
+              className="search_list__items"
+              onChange={sub1ChangeHandler}
+            />
+            <input
+              type="text"
+              placeholder="Number of People"
+              className="search_list__items"
+              onChange={subPeople1ChangeHandler}
+            />
+          </form>
+        )}
+        {enter1 && (
+          <DisplaySub2
+            subItem1={subdata1.subItem1}
+            subPeople1={subdata1.subPeople1}
           />
-          <input
-            type="text"
-            placeholder="Number of People"
-            className="search_list__items"
-            onChange={subPeopleChangeHandler}
-          />
-        </form>
-
-        <form className="subpage_list">
-          <input
-            type="text"
-            placeholder="Sub Category name"
-            className="search_list__items"
-            onChange={sub1ChangeHandler}
-          />
-          <input
-            type="text"
-            placeholder="Number of People"
-            className="search_list__items"
-            onChange={subPeople1ChangeHandler}
-          />
-        </form>
+        )}
       </div>
     </>
   );
