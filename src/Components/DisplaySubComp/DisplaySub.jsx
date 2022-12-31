@@ -53,7 +53,6 @@ const Display = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.status === "Success");
-        alert("Data saved");
       });
   };
 
@@ -75,7 +74,6 @@ const Display = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.status === "Success");
-        alert("Data saved");
       });
   };
 
