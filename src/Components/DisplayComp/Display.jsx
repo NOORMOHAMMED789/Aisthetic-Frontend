@@ -46,6 +46,17 @@ const Display = (props) => {
       setEnter(false);
       console.log("Enter Clicked");
       console.log(subItem, subPeople);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Day: subItem, Persons: subPeople }),
+      };
+      fetch("http://localhost:3001/api/v1/user", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.status === "Success");
+          alert("Data saved");
+        });
     }
   };
 
@@ -56,6 +67,17 @@ const Display = (props) => {
       setShutMain(false);
       console.log("Enter Clicked");
       console.log(subItem1, subPeople1);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Day: subItem1, Persons: subPeople1 }),
+      };
+      fetch("http://localhost:3001/api/v1/user", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.status === "Success");
+          alert("Data saved");
+        });
     }
   };
 
@@ -79,7 +101,9 @@ const Display = (props) => {
         </h1>
       </div>
 
-      <div className="list">{getId}</div>
+      <div className="list" autoFocus>
+        {getId}
+      </div>
       <div className="search_list">
         <input
           className="dropdown-btn search_list__items"
@@ -92,6 +116,7 @@ const Display = (props) => {
               <div
                 className="item_lists"
                 key={index}
+                onKeyDown={() => console.log("arrow clicked")}
                 onClick={() => {
                   console.log(item.item);
                   setGetId([...getId, item.item]);

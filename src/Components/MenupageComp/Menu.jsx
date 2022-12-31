@@ -25,6 +25,17 @@ const Menu = () => {
       setEnterForm(false);
       console.log("Enter Clicked");
       console.log(item, people);
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Day: item, Persons: people }),
+      };
+      fetch("http://localhost:3001/api/v1/user", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.status === "Success");
+          alert("Data saved");
+        });
     }
   };
 

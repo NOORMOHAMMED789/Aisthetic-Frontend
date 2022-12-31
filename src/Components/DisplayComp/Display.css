@@ -46,3 +46,12 @@ body {
   border: 1px solid blue;
   transform: scale(1.1);
 }
+
+.list {
+  font-size: 1.3rem;
+  margin-left: 1vw;
+  display: inline-block;
+  display: block;
+  color: darkslategray;
+  font-weight: bold;
+}

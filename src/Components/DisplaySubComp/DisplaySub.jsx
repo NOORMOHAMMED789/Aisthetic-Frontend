@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DisplaySub.css";
 import DisplaySub2 from "../DisplaySubComp2/DisplaySub2";
 import axios from "axios";
@@ -16,6 +16,10 @@ const Display = (props) => {
   const [enter, setEnter] = useState(true);
   const [enter1, setEnter1] = useState(false);
   const [enter3, setEnter3] = useState(true);
+  const [focus, setFocus] = useState(false);
+  const [itemsArray, setItemsArray] = useState([]);
+
+  const [getId, setGetId] = useState([]);
 
   const subChangeHandler = (e) => {
     setSubData({ ...subdata, subItem: e.target.value });
@@ -40,6 +44,17 @@ const Display = (props) => {
       console.log("Enter Clicked");
       console.log(subItem, subPeople);
     }
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Day: subItem, Persons: subPeople }),
+    };
+    fetch("http://localhost:3001/api/v1/user", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.status === "Success");
+        alert("Data saved");
+      });
   };
 
   const enterHandler1 = (e) => {
@@ -51,7 +66,28 @@ const Display = (props) => {
       console.log("Enter Clicked");
       console.log(subItem1, subPeople1);
     }
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Day: subItem1, Persons: subPeople1 }),
+    };
+    fetch("http://localhost:3001/api/v1/user", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.status === "Success");
+        alert("Data saved");
+      });
   };
+
+  useEffect(() => {
+    axios
+      .get("http:///localhost:3001/api/v1/items")
+      .then((response) => {
+        console.log(response.data.products);
+        setItemsArray(response.data.products);
+      })
+      .then((err) => console.log(err));
+  }, []);
   return (
     <>
       <div className="subdisplay_items">
@@ -62,13 +98,30 @@ const Display = (props) => {
             <span>MoveDown</span>
           </h1>
         </div>
+        <div className="list">{getId}</div>
         <div className="search_list">
           <input
-            type="text"
-            placeholder="Search items to add"
-            className="search_list__items"
+            className="dropdown-btn search_list__items"
+            placeholder="Search to add Items"
+            onFocus={() => setFocus(!focus)}
           />
+          {focus &&
+            itemsArray.map((item, index) => {
+              return (
+                <div
+                  className="item_lists"
+                  key={index}
+                  onClick={() => {
+                    console.log(item.item);
+                    setGetId([...getId, item.item]);
+                  }}
+                >
+                  {item.item}
+                </div>
+              );
+            })}
         </div>
+
         {enter && (
           <form className="menupage_list" onKeyDown={enterHandler}>
             <input
