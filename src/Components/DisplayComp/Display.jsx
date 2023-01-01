@@ -107,7 +107,7 @@ const Display = (props) => {
     <div className="display_items">
       <div className="display_items__list">
         <h1 className="display_main_category">
-          {props.item}, {props.people} &nbsp; <span>Edit</span> &nbsp;{" "}
+          {props.array}, {props.people} &nbsp; <span>Edit</span> &nbsp;{" "}
           <span>Delete</span> &nbsp; <span>MoveUp</span> &nbsp;{" "}
           <span>MoveDown</span>
         </h1>

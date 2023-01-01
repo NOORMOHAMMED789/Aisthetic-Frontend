@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./Menu.css";
 import Display from "../DisplayComp/Display";
+import { useEffect } from "react";
+
+const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const Menu = () => {
   //!This state is responsible for the data management at level-1
@@ -10,6 +13,7 @@ const Menu = () => {
   });
   const [enter, setEnter] = useState(false);
   const [enterform, setEnterForm] = useState(true);
+  const [array, setArray] = useState([]);
 
   //!This function is responsible for the change in the item property
   const itemChangeHandler = (e) => {
@@ -21,6 +25,21 @@ const Menu = () => {
     setData({ ...data, people: e.target.value });
   };
 
+  useEffect(() => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(`${URL}/api/v1/order`, requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.orders);
+        setArray(data.orders);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   //*!Click on the enter button, this function will tigger
   const clickHandler = (e) => {
     const { item, people } = data;
@@ -72,7 +91,7 @@ const Menu = () => {
           )}
         </div>
       </div>
-      {enter && <Display item={data.item} people={data.people} />}
+      {enter && <Display array={array} item={data.item} people={data.people} />}
     </div>
   );
 };
