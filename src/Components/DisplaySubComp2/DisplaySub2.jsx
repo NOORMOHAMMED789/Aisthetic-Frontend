@@ -6,8 +6,10 @@ const DisplaySub2 = (props) => {
   const [focus, setFocus] = useState(false);
   const [itemsArray, setItemsArray] = useState([]);
 
+  //!Below array is to display the items of the array(Sambar,coffee,tea,.....)
   const [getId, setGetId] = useState([]);
 
+  //!Below Method will help to get the data of items come from backend API.
   useEffect(() => {
     axios
       .get("http:///localhost:3001/api/v1/items")
