@@ -3,6 +3,7 @@ import "./Menu.css";
 import Display from "../DisplayComp/Display";
 
 const Menu = () => {
+  //!This state is responsible for the data management at level-1
   const [data, setData] = useState({
     item: "",
     people: "",
@@ -10,14 +11,17 @@ const Menu = () => {
   const [enter, setEnter] = useState(false);
   const [enterform, setEnterForm] = useState(true);
 
+  //!This function is responsible for the change in the item property
   const itemChangeHandler = (e) => {
     setData({ ...data, item: e.target.value });
   };
 
+  //!This function is responsible for the change in the people property
   const peopleChangeHandler = (e) => {
     setData({ ...data, people: e.target.value });
   };
 
+  //*!Click on the enter button, this function will tigger
   const clickHandler = (e) => {
     const { item, people } = data;
     if (e.key === "Enter") {
@@ -30,6 +34,7 @@ const Menu = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Day: item, Persons: people }),
       };
+      //!Here, we are sending the data, to the server then to MongoDB altas.
       fetch("http://localhost:3001/api/v1/user", requestOptions)
         .then((response) => response.json())
         .then((data) => {
