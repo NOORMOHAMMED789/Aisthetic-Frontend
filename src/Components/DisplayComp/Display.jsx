@@ -5,15 +5,18 @@ import "./Display.css";
 import axios from "axios";
 
 const Display = (props) => {
+  //!This state is responsible for the data management at level-2.1(Breakfast)
   const [subdata, setSubData] = useState({
     subItem: "",
     subPeople: "",
   });
+  //!This state is responsible for the data management at level-2.2(lunch)
   const [subdata1, setSubData1] = useState({
     subItem1: "",
     subPeople1: "",
   });
 
+  //!Below array contains the data of the items that comes from backend
   const [itemsArray, setItemsArray] = useState([]);
 
   const [enable, setEnable] = useState(false);
@@ -22,23 +25,30 @@ const Display = (props) => {
   const [shutmain, setShutMain] = useState(true);
   const [focus, setFocus] = useState(false);
 
+  //!Below array is to display the items of the array(Sambar,coffee,tea,.....)
   const [getId, setGetId] = useState([]);
 
+  //!Below method helps to get the values of the data(breakfast..)
   const subChangeHandler = (e) => {
     setSubData({ ...subdata, subItem: e.target.value });
   };
 
+  //!Below method helps to get the values of the data(people..)
   const subPeopleChangeHandler = (e) => {
     setSubData({ ...subdata, subPeople: e.target.value });
   };
+
+  //!Below method helps to get the values of the data(Lunch..)
   const sub1ChangeHandler = (e) => {
     setSubData1({ ...subdata1, subItem1: e.target.value });
   };
 
+  //!Below method helps to get the values of the data(people(lunch)..)
   const subPeople1ChangeHandler = (e) => {
     setSubData1({ ...subdata1, subPeople1: e.target.value });
   };
 
+  //! Below method will help to post the data at the level 2.1(breakfast)
   const enterHandler = (e) => {
     const { subItem, subPeople } = subdata;
     if (e.key === "Enter") {
@@ -60,6 +70,7 @@ const Display = (props) => {
     }
   };
 
+  //! Below method will help to post the data at the level 2.2(Lunch)
   const enterHandler1 = (e) => {
     const { subItem1, subPeople1 } = subdata1;
     if (e.key === "Enter") {
@@ -81,6 +92,7 @@ const Display = (props) => {
     }
   };
 
+  //!Below Method will help to get the data of items come from backend API.
   useEffect(() => {
     axios
       .get("http:///localhost:3001/api/v1/items")

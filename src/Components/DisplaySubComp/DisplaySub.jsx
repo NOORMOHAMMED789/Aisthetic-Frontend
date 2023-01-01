@@ -4,10 +4,12 @@ import DisplaySub2 from "../DisplaySubComp2/DisplaySub2";
 import axios from "axios";
 
 const Display = (props) => {
+  //!This state is responsible for the data management
   const [subdata, setSubData] = useState({
     subItem: "",
     subPeople: "",
   });
+  //!This state is responsible for the data management
   const [subdata1, setSubData1] = useState({
     subItem1: "",
     subPeople1: "",
@@ -19,16 +21,21 @@ const Display = (props) => {
   const [focus, setFocus] = useState(false);
   const [itemsArray, setItemsArray] = useState([]);
 
+  //!Below array is to display the items of the array(Sambar,coffee,tea,.....)
   const [getId, setGetId] = useState([]);
 
+  //!Below method helps to get the values of the data
   const subChangeHandler = (e) => {
     setSubData({ ...subdata, subItem: e.target.value });
   };
+
+  //!Below method helps to get the values of the data(people..)
 
   const subPeopleChangeHandler = (e) => {
     setSubData({ ...subdata, subPeople: e.target.value });
   };
 
+  //!Below method helps to get the values of the data(Lunch..)
   const sub1ChangeHandler = (e) => {
     setSubData1({ ...subdata1, subItem1: e.target.value });
   };
@@ -36,7 +43,7 @@ const Display = (props) => {
   const subPeople1ChangeHandler = (e) => {
     setSubData1({ ...subdata1, subPeople1: e.target.value });
   };
-
+  //! Below method will help to post the data at the other level
   const enterHandler = (e) => {
     const { subItem, subPeople } = subdata;
     if (e.key === "Enter") {
@@ -53,10 +60,10 @@ const Display = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.status === "Success");
-        alert("Data saved");
       });
   };
 
+  //! Below method will help to post the data at the other level
   const enterHandler1 = (e) => {
     const { subItem1, subPeople1 } = subdata1;
     if (e.key === "Enter") {
@@ -75,10 +82,9 @@ const Display = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.status === "Success");
-        alert("Data saved");
       });
   };
-
+  //!Below Method will help to get the data of items come from backend API.
   useEffect(() => {
     axios
       .get("http:///localhost:3001/api/v1/items")
