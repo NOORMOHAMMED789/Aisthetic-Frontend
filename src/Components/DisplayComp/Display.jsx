@@ -28,7 +28,7 @@ const Display = (props) => {
   //!Below array is to display the items of the array(Sambar,coffee,tea,.....)
   const [getId, setGetId] = useState([]);
 
-  //!below method helps to get the values of the data(breakfast..)
+  //!Below method helps to get the values of the data(breakfast..)
   const subChangeHandler = (e) => {
     setSubData({ ...subdata, subItem: e.target.value });
   };
